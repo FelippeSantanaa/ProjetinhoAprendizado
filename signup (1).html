@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste De Resgistro de Usuario</title>
+    <link href="/style_Sig.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <header cla> 
+    <img class="logo" src="imagens/logoC6.png" alt=”some”>
+    </header>
+        
+    <a href="login.html">Login</a><br>
+    <main>
+    <div class="signup-content">    
+        <h1>Singup</h1>
+
+        <p><button onclick="personFisica()">Pessoa Fisica</button></p>
+        <p><button onclick="personJuridica()">Pessoa Juridica</button></p>
+
+            <div class="" style="display:none;" id="personFisica">
+                <form id="formPf">
+                    <label for="">Nome Completo</label><br>
+                    <input type="text" name="pf_name"><br><br>
+                    <label for="">CPF</label><br>
+                    <input type="text" name="pf_cpf"><br><br>
+                    <label for="">Capital</label><br>
+                    <input type="text" name="pf_capital" /><br><br>
+                    <label for="">Endereço</label><br>
+                    <input type="text" name="pf_end" /><br><br>
+                    <label for="">Estado</label><br>
+                    <select name="pf_state" id="">
+                        <option value="">Selecione</option>
+                        <option value="sp">Sao Paulo</option>
+                        <option value="rj">Rio de Janeiro</option>
+                        <option value="pr">Parana</option>
+                    </select><br><br>
+                    <label for="">Bairro</label><br>
+                    <input type="text" name="pf_bairro" /><br><br>
+                    <label for="">CEP</label><br>
+                    <input type="text" name="pf_cep" /><br><br>
+                    <label for="">E-mail</label><br>
+                    <input type="email" name="pf_mail"><br><br>
+                    <label for="">Senha</label><br>
+                    <input type="password" name="pf_password" /><br><br>
+                    <input type="submit" value="Cadastrar-se">
+                </form>
+            </div>
+
+            <div style="display:none;" id="personJuridica">
+                <form id="formPj">
+                    <label for="pj_razaoSocial">Razao Social</label><br>
+                    <input type="text" id="pj_razaoSocial" name="pj_razaoSocial"><br><br>
+                    <label for="pj_cnpj">CNPJ</label><br>
+                    <input type="text" id="pj_cnpj" name="pj_cnpj"><br><br>
+                    <label for="pj_cnae">CNAE</label><br>
+                    <select id="pj_cnae" name="pj_cnae">
+                        <option value="">Selecione</option>
+                        <option value="pequeno">Pequeno Porte</option>
+                        <option value="medio">Medio Porte</option>
+                        <option value="grande">Grande Porte</option>
+                    </select><br><br>
+                    <label for="pj_captial">Capital</label><br>
+                    <input type="text" id="pj_captial" /><br><br>
+                    <label for="pj_mail">E-mail</label><br>
+                    <input type="email" id="pj_mail" name="pj_mail"><br><br>
+                    <label for="pj_password">Senha</label><br>
+                    <input type="password" id="pj_password" name="pj_password"><br><br>
+
+                    <input type="submit" value="Cadastrar-se" class="Cadastrar">
+                </form>
+            </div>
+
+        </form>
+    </div>
+</main>
+</body>
+</html>
+
+<script>
+
+    const formPf = document.getElementById("formPf");
+    const formPj = document.getElementById("formPj"); 
+
+    function personFisica()
+    {
+        document.getElementById("personJuridica").style.display = 'none';
+        document.getElementById("personFisica").style.display = 'block';
+
+        formPf.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            let formData = new FormData(formPf);
+            let data = {
+                FieldName : formData.get('pf_name'),
+                FieldCpf : formData.get('pf_cpf'),
+                FieldCapital : formData.get('pf_capital'),
+                FieldEnd : formData.get('pf_end'),
+                FieldState : formData.get('pf_state'),
+                FieldBairro : formData.get('pf_bairro'),
+                FieldCep : formData.get('pf_cep'),
+                FieldMail : formData.get('pf_mail'),
+                FieldPassword : formData.get('pf_password')
+            }
+            
+            fetch('/signuppf', {
+                method : "POST",
+                body : JSON.stringify(data),
+                headers : {
+                    'content-type' : 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then((result) => {
+                if(result == true){
+                   window.location.href = "/index.html";
+                }
+            })
+            .catch(erro => console.error(erro));
+
+        });
+
+
+    }
+
+    function personJuridica()
+    {
+        document.getElementById("personFisica").style.display = 'none';
+        document.getElementById("personJuridica").style.display = 'block';
+
+        formPj.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            let formData = new FormData(formPj);
+            let data = {
+                FieldRazaoSocial : formData.get('pj_razaoSocial'),
+                FieldCnpj : formData.get('pj_cnpj'),
+                FieldCnae : formData.get('pj_cnae'),
+                FieldCapital : formData.get('pj_capital'),
+                FieldMail : formData.get('pj_mail'),
+                FieldPassword : formData.get('pj_password'),
+            }
+
+            fetch('/signuppj', {
+                method : "POST",
+                body : JSON.stringify(data),
+                headers : {
+                    'content-type' : 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then((result) => {
+                if(result == true){
+                   window.location.href = "/index.html";
+                }
+            })
+            .catch(erro => console.error(erro));
+        });
+
+
+
+    }
+</script>

@@ -1,0 +1,89 @@
+#cor {
+    color: yellow
+   }
+   
+   body {
+       background-image: url('imagens/fundoCarbon.png');
+   }
+
+   h1{
+    color:#ffffff;
+    margin-top: 50px;
+    text-transform: uppercase;
+   
+}
+
+#itens{
+ padding-left: 10px;
+}
+button{
+    background:#fed500;
+    left: 30px;
+    border-radius: 4px;
+    padding: 1rem 1.8rem;
+    
+}
+header{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 45px;
+    animation: c6 .8s ease-out;
+    position: relative;
+    
+}
+label{
+    color: white;
+    size: 22px;
+    width: 78px;
+    left: 15px;
+    text-transform: uppercase;
+}
+@keyframes c6 {
+    0%   {
+      opacity: 0;
+      right: -5rem;
+    }
+    100% {
+      opacity: 1;
+      right: 0;
+    }
+  }
+.logo{
+    width: 239px;
+    animation: c6 .8s ease-out;
+    position: relative;
+}
+.inputDefault{
+    border-radius:4px; 
+}
+main{
+    display: flex;
+    min-height: calc(100vh - 100px);
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    flex-direction: column;
+    text-transform: uppercase;
+    border-radius: 4px;  
+}
+
+.signup-content {
+    animation: c6 .8s ease-out; 
+    position: relative;
+}
+input[type="submit"] {
+    background: #fed500;
+    left: 30px;
+    border-radius: 4px;
+    padding: 1rem 1.8rem;
+}
